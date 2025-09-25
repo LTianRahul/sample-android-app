@@ -32,14 +32,14 @@ public class sampleDemo extends AppCompatActivity {
                 if (inputUsername.equals(USERNAME) && inputPassword.equals(PASSWORD)) {
                     Toast.makeText(sampleDemo.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
-                    // ⚠️ Tricky crash: looks like harmless list usage
+
                     List<Object> data = new ArrayList<>();
                     data.add("Hello");
                     data.add(123);  // adding Integer
 
-                    // Reviewer may think: "safe cast to String"
+
                     for (Object obj : data) {
-                        String s = (String) obj; // 💥 ClassCastException at runtime for the Integer
+                        String s = (String) obj;
                         System.out.println(s);
                     }
 
