@@ -33,7 +33,8 @@ public class LoginActivity extends AppCompatActivity {
                     throw new RuntimeException("Intentional crash for Bito testing");
                 } else {
                     Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-
+                    // Crash the app intentionally
+                    throw new RuntimeException("Intentional crash for Bito testing");
                 }
             }
         });
