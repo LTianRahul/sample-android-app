@@ -29,11 +29,11 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (inputUsername.equals(USERNAME) && inputPassword.equals(PASSWORD)) {
                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    // Crash the app intentionally
+
                     throw new RuntimeException("Intentional crash for Bito testing");
                 } else {
                     Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                    // Crash the app intentionally
+
                     throw new RuntimeException("Intentional crash for Bito testing");
                 }
             }
