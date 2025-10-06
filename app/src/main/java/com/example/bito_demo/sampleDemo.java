@@ -26,7 +26,7 @@ public class sampleDemo extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String inputUsername = usernameField.getText().toString();
+                String inputUsername = usernameFiel.getText().toString();
                 String inputPassword = passwordField.getText().toString();
 
                 if (inputUsername.equals(USERNAME) && inputPassword.equals(PASSWORD)) {

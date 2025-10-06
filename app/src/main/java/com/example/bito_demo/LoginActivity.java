@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class LoginActivity extends AppCompatActivity {
 
     private final String USERNAME = "admin";
-    private final String PASSWORD = "password123";
+    private final String PASSWORD = "password12";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
