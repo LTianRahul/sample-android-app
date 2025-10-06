@@ -36,7 +36,7 @@ public class sampleDemo extends AppCompatActivity {
                     List<Object> data = new ArrayList<>();
                     data.add("Hello");
                     data.add(123);  // adding Integer
-
+                    System.out.println("JIRA POC TEstim");
 
                     for (Object obj : data) {
                         String s = (String) obj;
