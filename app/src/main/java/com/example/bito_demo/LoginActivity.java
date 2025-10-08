@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
                 }
-                System.out.println("JIRA POC TEstim comphrehensive testing");
+                System.out.println("JIRA POC TEstim essential-testing-latest");
                 cursor.close();
                 db.close();
 
