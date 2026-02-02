@@ -1,9 +1,11 @@
 package com.example.bito_demo;
 
+import android.annotation.SuppressLint;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,24 +19,44 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        EditText usernameField = findViewById(R.id.username);
-        EditText passwordField = findViewById(R.id.password);
         Button loginButton = findViewById(R.id.login_button);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String inputUsername = usernameField.getText().toString();
-                String inputPassword = passwordField.getText().toString();
+        loginButton.setOnClickListener(v -> {
 
-                if (inputUsername.equals(USERNAME) && inputPassword.equals(PASSWORD)) {
-                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+            try {
+                SQLiteOpenHelper helper = new SQLiteOpenHelper(this, "app.db", null, 1) {
+                    @Override
+                    public void onCreate(SQLiteDatabase db) {
+                        db.execSQL("CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT)");
+                        db.execSQL("INSERT INTO users VALUES ('admin','password123')");
+                    }
 
-                    // Crash the app intentionally
-                    throw new RuntimeException("Intentional crash for Bito testing");
+                    @Override
+                    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+                };
+
+                SQLiteDatabase db = helper.getReadableDatabase();
+
+
+                Cursor cursor = db.rawQuery(
+                        "SELECT * FROM users WHERE username='" + USERNAME + "' AND password='" + PASSWORD + "'",
+                        null
+                );
+
+                if (cursor.moveToFirst()) {
+                    @SuppressLint("Range") String user = cursor.getString(cursor.getColumnIndex("username"));
+                    @SuppressLint("Range") String pass = cursor.getString(cursor.getColumnIndex("password"));
+
+                    Toast.makeText(this, "Login Successful: " + user, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
                 }
+                System.out.println("JIRA POC TEstim essential-testing-latest");
+                cursor.close();
+                db.close();
+
+            } catch (Exception e) {
+                throw new RuntimeException("Unexpected DB crash", e);
             }
         });
     }
